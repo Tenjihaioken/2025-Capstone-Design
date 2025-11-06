@@ -5215,7 +5215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19306cd3779b566428a19b35bf2aee71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  state: 1
+  state: 4
   viewDistance: 8
   viewAngle: 90
   viewMask:
@@ -5223,7 +5223,7 @@ MonoBehaviour:
     m_Bits: 8
   eyes: {fileID: 875915534}
   soundRadius: 6
-  walkSpeed: 30
+  walkSpeed: 10
   chaseSpeed: 30
   patrolPoints:
   - {fileID: 119331469}

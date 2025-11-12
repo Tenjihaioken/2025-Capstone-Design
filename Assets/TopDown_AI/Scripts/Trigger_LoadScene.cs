@@ -14,7 +14,7 @@ public class Trigger_LoadScene : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider user){
 		if (user.tag == "Player") {
-			Application.LoadLevel(sceneName);
+			Application.LoadLevel("TopDown_Stage2");
 		}
 	}
 }

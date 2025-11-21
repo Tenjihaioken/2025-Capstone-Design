@@ -1,0 +1,39 @@
+Warehouse
+
+This collection contains a complete 2300 m2 warehouse (logistic storage) model with props.
+Everything you see in the screenshots are included. Good choice for prototyping or populating industrial projects.
+Please refer to the screenshots for details and to see what models are included. 
+
+The package contains:
+ - Exterior cover parts/walls
+ - Complete wall mesh
+ - Large industrial gate
+ - Low-pitched industrial gate (Single and double width)
+ - Windowed wall modules
+ - Doors
+ - Roof cover modules
+ - Different scaffoldings for various setups
+ - Exterior area (refer to screenshots)
+ - Modular shelf meshes
+
+Props:
+ - Pallets (wood, plastic)
+ - 6 different crates/boxes
+ - woods (beams)
+ - modular ventillation system with 8 different modules
+ - containers
+ - industrial crane
+
+Various other props:
+ - Lamps, traffic control light, gate number (modify the textures for different numbers)
+
+File available in 3DS Max file;OBJ and FBX. You can find the textures in the .rar file.
+
+Texturing:
+ - Most models have textures assigned to them and are unwrapped
+
+If you have any questions, please contact me here!
+
+This model made whit my own modular package, what you can find in my portfolio!
+
+Note: If you're using VRay, you'll likely have to reconnect the nodes and textures.

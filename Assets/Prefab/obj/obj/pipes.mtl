@@ -1,0 +1,125 @@
+# Blender MTL File: 'pipes.blend'
+# Material Count: 11
+
+newmtl Material.001
+Ns 63.660041
+Ka 0.886525 0.886525 0.886525
+Kd 0.800000 0.800000 0.800000
+Ks 0.372340 0.372340 0.372340
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0082_M.jpg
+
+newmtl Material.002
+Ns 13.863732
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0061_M.jpg
+
+newmtl Material.003
+Ns 27.172929
+Ka 0.900709 0.900709 0.900709
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0081_M.jpg
+
+newmtl Material.004
+Ns 47.815759
+Ka 0.794326 0.794326 0.794326
+Kd 0.800000 0.800000 0.800000
+Ks 0.159574 0.159574 0.159574
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Heavy Machine\\TexturesCom_MachineryHeavy0011_M.jpg
+
+newmtl Material.005
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\ANOTHER NEW PLAN\\Props\\TexturesCom_Pipes0088_M.jpg
+
+newmtl Material.006
+Ns 110.921243
+Ka 0.787234 0.787234 0.787234
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0029_M.jpg
+
+newmtl Material.007
+Ns 225.000000
+Ka 0.801418 0.801418 0.801418
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0029_M.jpg
+
+newmtl Material.008
+Ns 110.921243
+Ka 0.730496 0.730496 0.730496
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0083_M.jpg
+
+newmtl Material.009
+Ns 308.114521
+Ka 0.893617 0.893617 0.893617
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0033_M.jpg
+map_Ns C:\\Users\\sapor\\Downloads\\blender\\textures\\Metal\\Metal020_4K_Displacement.jpg
+
+newmtl Material.010
+Ns 250.214851
+Ka 0.964539 0.964539 0.964539
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_MetalBare0176_2_M.jpg
+
+newmtl Material.011
+Ns 379.006317
+Ka 0.893617 0.893617 0.893617
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\sapor\\Downloads\\blender\\textures\\Tube textures\\TexturesCom_Pipes0051_M.jpg
+map_Ns C:\\Users\\sapor\\Downloads\\blender\\textures\\Metal\\Metal020_4K_Displacement.jpg

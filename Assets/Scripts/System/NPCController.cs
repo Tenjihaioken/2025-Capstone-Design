@@ -3,18 +3,18 @@ using UnityEngine;
 public class NPCController : MonoBehaviour
 {
     [Header("Settings")]
-    public int dialogueID = 100; // JSON¿¡ ÀûÈù ID¿Í ÀÏÄ¡½ÃÄÑ¾ß ÇÔ
-    public string nextObjective = "´ÙÀ½ Áö¿ªÀ¸·Î ÀÌµ¿ÇÏ¼¼¿ä."; // ´ëÈ­ ÈÄ °»½ÅµÉ ¸ñÇ¥
+    public int dialogueID = 100; // JSONì— ì íŒ IDì™€ ì¼ì¹˜ì‹œì¼œì•¼ í•¨
+    public string nextObjective = "ë‹¤ìŒ ì§€ì—­ìœ¼ë¡œ ì´ë™í•˜ì„¸ìš”."; // ëŒ€í™” í›„ ê°±ì‹ ë  ëª©í‘œ
 
     private bool isPlayerNear = false;
 
-    // Æ®¸®°Å °¨Áö (2D Collider isTrigger Ã¼Å© ÇÊ¼ö)
+    // íŠ¸ë¦¬ê±° ê°ì§€ (2D Collider isTrigger ì²´í¬ í•„ìˆ˜)
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNear = true;
-            // (¼±ÅÃ) "ZÅ°¸¦ ´­·¯ ´ëÈ­" °°Àº ¾È³» ¹®±¸ Ç¥½Ã °¡´É
+            // (ì„ íƒ) "Zí‚¤ë¥¼ ëˆŒëŸ¬ ëŒ€í™”" ê°™ì€ ì•ˆë‚´ ë¬¸êµ¬ í‘œì‹œ ê°€ëŠ¥
         }
     }
 
@@ -23,19 +23,19 @@ public class NPCController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
-            PlatformerSceneManager.Instance.CloseDialogue(); // ¸Ö¾îÁö¸é ´ëÈ­Ã¢ ´İ±â
+            PlatformerSceneManager.Instance.CloseDialogue(); // ë©€ì–´ì§€ë©´ ëŒ€í™”ì°½ ë‹«ê¸°
         }
     }
 
     void Update()
     {
-        // ÇÃ·¹ÀÌ¾î°¡ ±ÙÃ³¿¡ ÀÖ°í ZÅ°¸¦ ´©¸£¸é ´ëÈ­ ½ÃÀÛ
+        // í”Œë ˆì´ì–´ê°€ ê·¼ì²˜ì— ìˆê³  Zí‚¤ë¥¼ ëˆ„ë¥´ë©´ ëŒ€í™” ì‹œì‘
         if (isPlayerNear && Input.GetKeyDown(KeyCode.Z))
         {
-            // 1. ´ëÈ­ Ãâ·Â
+            // 1. ëŒ€í™” ì¶œë ¥
             PlatformerSceneManager.Instance.ShowDialogue(dialogueID);
 
-            // 2. ¸ñÇ¥ °»½Å (¿É¼Ç)
+            // 2. ëª©í‘œ ê°±ì‹  (ì˜µì…˜)
             PlatformerSceneManager.Instance.UpdateObjective(nextObjective);
         }
     }

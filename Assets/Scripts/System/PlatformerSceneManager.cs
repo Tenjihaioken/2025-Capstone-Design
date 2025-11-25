@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // TextMeshPro »ç¿ë
+using TMPro; // TextMeshPro ì‚¬ìš©
 using System.Collections.Generic;
 using System.IO;
 
-// JSON µ¥ÀÌÅÍ¸¦ ¹Ş±â À§ÇÑ Å¬·¡½º ±¸Á¶ Á¤ÀÇ
+// JSON ë°ì´í„°ë¥¼ ë°›ê¸° ìœ„í•œ í´ë˜ìŠ¤ êµ¬ì¡° ì •ì˜
 [System.Serializable]
 public class DialogueData
 {
@@ -24,46 +24,46 @@ public class PlatformerSceneManager : MonoBehaviour
     public static PlatformerSceneManager Instance;
 
     [Header("1. JSON Dialogue System")]
-    public TextAsset dialogueJsonFile; // ÀÎ½ºÆåÅÍ¿¡ JSON ÆÄÀÏ ÇÒ´ç
-    public GameObject dialoguePanel;   // ´ëÈ­Ã¢ UI ÆĞ³Î
-    public TextMeshProUGUI nameText;   // È­ÀÚ ÀÌ¸§ ÅØ½ºÆ®
-    public TextMeshProUGUI contentText;// ´ëÈ­ ³»¿ë ÅØ½ºÆ®
-    private Dictionary<int, DialogueData> dialogueDictionary; // ºü¸¥ °Ë»öÀ» À§ÇÑ µñ¼Å³Ê¸®
+    public TextAsset dialogueJsonFile; // ì¸ìŠ¤í™í„°ì— JSON íŒŒì¼ í• ë‹¹
+    public GameObject dialoguePanel;   // ëŒ€í™”ì°½ UI íŒ¨ë„
+    public TextMeshProUGUI nameText;   // í™”ì ì´ë¦„ í…ìŠ¤íŠ¸
+    public TextMeshProUGUI contentText;// ëŒ€í™” ë‚´ìš© í…ìŠ¤íŠ¸
+    private Dictionary<int, DialogueData> dialogueDictionary; // ë¹ ë¥¸ ê²€ìƒ‰ì„ ìœ„í•œ ë”•ì…”ë„ˆë¦¬
 
     [Header("2. Objective System")]
-    public TextMeshProUGUI objectiveText; // ¸ñÇ¥ Ç¥½Ã ÅØ½ºÆ®
+    public TextMeshProUGUI objectiveText; // ëª©í‘œ í‘œì‹œ í…ìŠ¤íŠ¸
 
     [Header("3. Minimap System")]
-    public RawImage minimapUI; // ¿ì»ó´Ü ¹Ì´Ï¸Ê UI
+    public RawImage minimapUI; // ìš°ìƒë‹¨ ë¯¸ë‹ˆë§µ UI
 
     void Awake()
     {
         Instance = this;
-        LoadDialogueData(); // °ÔÀÓ ½ÃÀÛ ½Ã JSON µ¥ÀÌÅÍ ·Îµå
+        LoadDialogueData(); // ê²Œì„ ì‹œì‘ ì‹œ JSON ë°ì´í„° ë¡œë“œ
     }
 
     void Start()
     {
-        // ÃÊ±â ¼³Á¤
-        if (dialoguePanel != null) dialoguePanel.SetActive(false); // ´ëÈ­Ã¢ ¼û±è
-        if (minimapUI != null) minimapUI.gameObject.SetActive(true); // ¹Ì´Ï¸Ê ÄÑ±â
+        // ì´ˆê¸° ì„¤ì •
+        if (dialoguePanel != null) dialoguePanel.SetActive(false); // ëŒ€í™”ì°½ ìˆ¨ê¹€
+        if (minimapUI != null) minimapUI.gameObject.SetActive(true); // ë¯¸ë‹ˆë§µ ì¼œê¸°
 
-        // ÃÊ±â ¸ñÇ¥ ¼³Á¤ (¿¹½Ã)
-        UpdateObjective("ÇöÀç ¸ñÇ¥: »ıÁ¸ÀÚ¸¦ Ã£¾Æ ´ëÈ­ÇÏ¼¼¿ä.");
+        // ì´ˆê¸° ëª©í‘œ ì„¤ì • (ì˜ˆì‹œ)
+        UpdateObjective("í˜„ì¬ ëª©í‘œ: ìƒì¡´ìë¥¼ ì°¾ì•„ ëŒ€í™”í•˜ì„¸ìš”.");
     }
 
     // ==========================================
-    // 1. ´ëÈ­ ½Ã½ºÅÛ (JSON)
+    // 1. ëŒ€í™” ì‹œìŠ¤í…œ (JSON)
     // ==========================================
     void LoadDialogueData()
     {
         if (dialogueJsonFile == null)
         {
-            Debug.LogError("JSON ÆÄÀÏÀÌ ÇÒ´çµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            Debug.LogError("JSON íŒŒì¼ì´ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
             return;
         }
 
-        // JSON ÆÄ½Ì
+        // JSON íŒŒì‹±
         DialogueList dataList = JsonUtility.FromJson<DialogueList>(dialogueJsonFile.text);
         dialogueDictionary = new Dictionary<int, DialogueData>();
 
@@ -71,37 +71,37 @@ public class PlatformerSceneManager : MonoBehaviour
         {
             dialogueDictionary.Add(data.id, data);
         }
-        Debug.Log($"´ëÈ­ µ¥ÀÌÅÍ ·Îµå ¿Ï·á: {dialogueDictionary.Count}°³");
+        Debug.Log($"ëŒ€í™” ë°ì´í„° ë¡œë“œ ì™„ë£Œ: {dialogueDictionary.Count}ê°œ");
     }
 
-    // ID¸¦ ÅëÇØ ´ëÈ­ Ãâ·Â (NPC°¡ ÀÌ ÇÔ¼ö¸¦ È£Ãâ)
+    // IDë¥¼ í†µí•´ ëŒ€í™” ì¶œë ¥ (NPCê°€ ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œ)
     public void ShowDialogue(int id)
     {
         if (dialogueDictionary.ContainsKey(id))
         {
-            dialoguePanel.SetActive(true); // ÆĞ³Î ÄÑ±â
+            dialoguePanel.SetActive(true); // íŒ¨ë„ ì¼œê¸°
             DialogueData data = dialogueDictionary[id];
 
             nameText.text = data.name;
             contentText.text = data.text;
 
-            // ´ëÈ­ Áß¿¡´Â ÇÃ·¹ÀÌ¾î ÀÌµ¿À» ¸·°Å³ª ½Ã°£À» ¸ØÃâ ¼ö ÀÖÀ½
+            // ëŒ€í™” ì¤‘ì—ëŠ” í”Œë ˆì´ì–´ ì´ë™ì„ ë§‰ê±°ë‚˜ ì‹œê°„ì„ ë©ˆì¶œ ìˆ˜ ìˆìŒ
             // Time.timeScale = 0; 
         }
         else
         {
-            Debug.LogWarning($"ID {id}¿¡ ÇØ´çÇÏ´Â ´ëÈ­°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning($"ID {id}ì— í•´ë‹¹í•˜ëŠ” ëŒ€í™”ê°€ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
     public void CloseDialogue()
     {
         dialoguePanel.SetActive(false);
-        // Time.timeScale = 1; // ½Ã°£ Àç°³
+        // Time.timeScale = 1; // ì‹œê°„ ì¬ê°œ
     }
 
     // ==========================================
-    // 2. ¸ñÇ¥ Ç¥½Ã ½Ã½ºÅÛ
+    // 2. ëª©í‘œ í‘œì‹œ ì‹œìŠ¤í…œ
     // ==========================================
     public void UpdateObjective(string newObjective)
     {
@@ -109,7 +109,7 @@ public class PlatformerSceneManager : MonoBehaviour
         {
             objectiveText.text = "- " + newObjective;
 
-            // (¼±ÅÃ) ¸ñÇ¥ °»½Å ½Ã ±ôºıÀÌ´Â È¿°ú µîÀ» ÁÙ ¼ö ÀÖÀ½
+            // (ì„ íƒ) ëª©í‘œ ê°±ì‹  ì‹œ ê¹œë¹¡ì´ëŠ” íš¨ê³¼ ë“±ì„ ì¤„ ìˆ˜ ìˆìŒ
         }
     }
 }

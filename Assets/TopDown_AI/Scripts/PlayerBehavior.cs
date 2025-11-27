@@ -19,7 +19,15 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Player Health Settings")]
     public float maxHP = 100f;
     private float currentHP;
-    public UnityEngine.UI.Slider hpBar; // (선택) HP 바 연결용
+    public UnityEngine.UI.Slider hpBar;
+    //---------------------------------------
+
+    // 🔫 탄약 시스템 --------------------------
+    [Header("Player Ammo Settings")]
+    public int maxAmmo = 30;
+    private int currentAmmo;
+    public UnityEngine.UI.Text ammoText;
+    public UnityEngine.UI.Text ammoTextbg;
     //---------------------------------------
 
     void Awake() { }
@@ -31,9 +39,13 @@ public class PlayerBehavior : MonoBehaviour
         hashSpeed = Animator.StringToHash("Speed");
         attackTimer.StartTimer(0.1f);
 
-        // 🩸 체력 초기화
+        // HP 초기화
         currentHP = maxHP;
         UpdateHealthUI();
+
+        // Ammo 초기화
+        currentAmmo = maxAmmo;
+        UpdateAmmoUI();
     }
 
     void Update()
@@ -51,6 +63,7 @@ public class PlayerBehavior : MonoBehaviour
                 if (Input.GetMouseButton(0) && attackTimer.IsFinished())
                     Attack();
                 break;
+
             case PlayerWeaponType.PISTOL:
                 if (Input.GetMouseButtonDown(0) && attackTimer.IsFinished())
                     Attack();
@@ -64,6 +77,18 @@ public class PlayerBehavior : MonoBehaviour
 
         attackTimer.UpdateTimer();
         UpdateAim();
+    }
+
+    // 🔫 UI 업데이트
+    void UpdateAmmoUI()
+    {
+        string ammoString = currentAmmo + " / " + maxAmmo;
+
+        if (ammoText != null)
+            ammoText.text = ammoString;
+
+        if (ammoText != null)
+            ammoTextbg.text = ammoString;
     }
 
     // 🩸 피격 처리 ---------------------------------
@@ -126,14 +151,27 @@ public class PlayerBehavior : MonoBehaviour
             case PlayerWeaponType.KNIFE:
                 Invoke("DoHitTest", 0.2f);
                 break;
+
             case PlayerWeaponType.PISTOL:
+                // 🔫 탄약 없으면 발사 불가
+                if (currentAmmo <= 0)
+                {
+                    Debug.Log("🔫 탄약이 없습니다!");
+                    return;
+                }
+
+                // 탄약 감소
+                currentAmmo--;
+                UpdateAmmoUI();
+
                 GameCamera.ToggleShake(0.1f);
-                GameObject bullet = GameObject.Instantiate(proyectilePrefab, gunPivot.position, gunPivot.rotation) as GameObject;
+                GameObject bullet = Instantiate(proyectilePrefab, gunPivot.position, gunPivot.rotation);
                 bullet.transform.LookAt(mousePointer.transform);
                 bullet.transform.Rotate(0, Random.Range(-7.5f, 7.5f), 0);
                 AlertEnemies();
                 break;
         }
+
         animator.SetBool("Attack", true);
         CancelInvoke("AttackOver");
         Invoke("AttackOver", attackTime);
@@ -186,6 +224,7 @@ public class PlayerBehavior : MonoBehaviour
                     attackTime = 0.4f;
                     animator.SetInteger("WeaponType", 0);
                     break;
+
                 case PlayerWeaponType.PISTOL:
                     attackTime = 0.1f;
                     animator.SetInteger("WeaponType", 3);
@@ -194,5 +233,13 @@ public class PlayerBehavior : MonoBehaviour
         }
         GameManager.SelectWeapon(weaponType);
     }
+
+    // 🔫 탄약 회복 (탄약 아이템에서 호출)
+    public void AddAmmo(int amount)
+    {
+        currentAmmo = Mathf.Min(maxAmmo, currentAmmo + amount);
+        UpdateAmmoUI();
+    }
 }
+
 

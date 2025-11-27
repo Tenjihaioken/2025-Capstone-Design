@@ -1,23 +1,58 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Anim_Levitate : MonoBehaviour {
-	public Vector2 time;
-	public Vector2 direction;
-	public iTween.EaseType easetype=iTween.EaseType.easeInOutSine;
-	public bool isLocal=false;
+public class Anim_Levitate : MonoBehaviour
+{
+    public Vector2 time;
+    public Vector2 direction;
+    public iTween.EaseType easetype = iTween.EaseType.easeInOutSine;
+    public bool isLocal = false;
 
-	// Use this for initialization
-	void Start () {
-		Vector3 targetPosition=transform.position;
-		targetPosition.x+=direction.x;
-		targetPosition.y+=direction.y;
-		//iTween.MoveTo(gameObject,iTween.Hash("x",targetPosition.x,"time",time.x,"looptype", iTween.LoopType.pingPong,"easetype",easetype,"islocal",isLocal));
-		iTween.MoveTo(gameObject,iTween.Hash("x",targetPosition.y,"time",time.y,"looptype", iTween.LoopType.pingPong,"easetype",easetype,"islocal",isLocal));
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private Vector3 startPos;
+
+    void Start()
+    {
+        startPos = isLocal ? transform.localPosition : transform.position;
+
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", startPos.x,
+            "to", startPos.x + direction.x,
+            "time", time.x,
+            "looptype", iTween.LoopType.pingPong,
+            "easetype", easetype,
+            "onupdate", "UpdateX"
+        ));
+
+        iTween.ValueTo(gameObject, iTween.Hash(
+            "from", startPos.y,
+            "to", startPos.y + direction.y,
+            "time", time.y,
+            "looptype", iTween.LoopType.pingPong,
+            "easetype", easetype,
+            "onupdate", "UpdateY"
+        ));
+    }
+
+    void UpdateX(float val)
+    {
+        Vector3 pos = isLocal ? transform.localPosition : transform.position;
+        pos.x = val;
+        if (isLocal)
+            transform.localPosition = pos;
+        else
+            transform.position = pos;
+    }
+
+    void UpdateY(float val)
+    {
+        Vector3 pos = isLocal ? transform.localPosition : transform.position;
+        pos.y = val;
+        if (isLocal)
+            transform.localPosition = pos;
+        else
+            transform.position = pos;
+    }
 }
+
+
+
+

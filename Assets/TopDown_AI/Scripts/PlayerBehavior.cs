@@ -30,6 +30,17 @@ public class PlayerBehavior : MonoBehaviour
     public UnityEngine.UI.Text ammoTextbg;
     //---------------------------------------
 
+    [Header("Audio Settings")]
+    public AudioSource audioSource;
+    public AudioClip pistolFireClip;
+    public AudioClip KnifeClip;
+    public AudioClip ammoPickupClip;
+
+    [Header("Footstep Settings")]
+    public AudioClip footstepClip;       // 발자국 사운드
+    public float footstepInterval = 0.4f; // 이동 속도에 따른 간격
+    private float footstepTimer = 0f;     // 타이머
+
     void Awake() { }
 
     void Start()
@@ -56,6 +67,10 @@ public class PlayerBehavior : MonoBehaviour
 
         Vector3 newVelocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
         myRigidBody.linearVelocity = newVelocity;
+
+        // 🔊 걸음 소리 처리
+        HandleFootsteps(inputHorizontal, inputVertical);
+
 
         switch (currentWeapon)
         {
@@ -125,6 +140,10 @@ public class PlayerBehavior : MonoBehaviour
         animator.transform.parent = null;
         this.enabled = false;
         myRigidBody.isKinematic = true;
+
+        // 🔊 죽을 때 피튀기는 소리 + 신음 소리 재생
+        GameManager.PlayEnemyDeathSounds(4.0f, 4.0f);
+
         GameManager.RegisterPlayerDeath();
         gameObject.GetComponent<Collider>().enabled = false;
         GameCamera.ToggleShake(0.3f);
@@ -150,6 +169,10 @@ public class PlayerBehavior : MonoBehaviour
         {
             case PlayerWeaponType.KNIFE:
                 Invoke("DoHitTest", 0.2f);
+
+                // 🔊 나이프 사운드 재생
+                if (audioSource != null && KnifeClip != null)
+                    audioSource.PlayOneShot(KnifeClip, 3.5f);
                 break;
 
             case PlayerWeaponType.PISTOL:
@@ -159,6 +182,10 @@ public class PlayerBehavior : MonoBehaviour
                     Debug.Log("🔫 탄약이 없습니다!");
                     return;
                 }
+
+                // 🔊 발사 사운드 재생
+                if (audioSource != null && pistolFireClip != null)
+                    audioSource.PlayOneShot(pistolFireClip);
 
                 // 탄약 감소
                 currentAmmo--;
@@ -239,7 +266,33 @@ public class PlayerBehavior : MonoBehaviour
     {
         currentAmmo = Mathf.Min(maxAmmo, currentAmmo + amount);
         UpdateAmmoUI();
+
+        // 🔊 탄약 획득 사운드 재생
+        if (audioSource != null && ammoPickupClip != null)
+            audioSource.PlayOneShot(ammoPickupClip, 2.5f); // 볼륨 조절 가능
     }
+
+    void HandleFootsteps(float inputH, float inputV)
+    {
+        // 키 입력 기반으로 이동 체크
+        if (Mathf.Abs(inputH) > 0.1f || Mathf.Abs(inputV) > 0.1f)
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                if (audioSource != null && footstepClip != null)
+                    audioSource.PlayOneShot(footstepClip, 4.5f); // 볼륨 조절
+
+                // 발자국 재생 간격 초기화
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f; // 멈추면 초기화
+        }
+    }
+
 }
 
 

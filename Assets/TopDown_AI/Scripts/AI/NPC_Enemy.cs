@@ -24,9 +24,10 @@ public class NPC_Enemy : MonoBehaviour {
 	float weaponActionTime,weaponTime;
 	int hashSpeed;
 	public NPC_PatrolNode patrolNode;
-	// Use this for initialization
+    // Use this for initialization
 
-	void Start () {
+
+    void Start () {
 		startingPos = transform.position;
 		hashSpeed = Animator.StringToHash ("Speed");
 		SetWeapon (weaponType);
@@ -262,31 +263,44 @@ public class NPC_Enemy : MonoBehaviour {
 	void EndAttack(){
 		SetState (NPC_EnemyState.INSPECT);
 	}
-	void AttackAction(){
-		switch (weaponType) {
-			case NPC_WeaponType.KNIFE:
-			RaycastHit[] hits=Physics.SphereCastAll (weaponPivot.position,2.0f, weaponPivot.forward);
-			foreach(RaycastHit hit in hits){
-				if (hit.collider!=null && hit.collider.tag == "Player") {
+
+    void AttackAction()
+    {
+        switch (weaponType)
+        {
+            case NPC_WeaponType.KNIFE:
+                RaycastHit[] hits = Physics.SphereCastAll(weaponPivot.position, 2.0f, weaponPivot.forward);
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.collider != null && hit.collider.tag == "Player")
+                    {
                         hit.collider.GetComponent<PlayerBehavior>().TakeDamage(20f);
                     }
-			}
-			break;
-			case NPC_WeaponType.RIFLE:
-				GameObject bullet=GameObject.Instantiate(proyectilePrefab, weaponPivot.position,weaponPivot.rotation) as GameObject;
-				bullet.transform.Rotate(0,Random.Range(-7.5f,7.5f),0);
-			break;
-			case NPC_WeaponType.SHOTGUN:
-				for(int i=0;i<5;i++){
-					GameObject birdshot=GameObject.Instantiate(proyectilePrefab, weaponPivot.position,weaponPivot.rotation) as GameObject;
-					birdshot.transform.Rotate(0,Random.Range(-15,15),0);
-				}
-			break;
-		}
-	}
-	////////////////////////// MISC FUNCTIONS //////////////////////////
+                }
+                // 칼 휘두를 때 사운드 재생
+                GameManager.PlayEnemyKnifeSwing(3.5f);
+                break;
 
-	void RandomRotate(){
+            case NPC_WeaponType.RIFLE:
+                GameObject bullet = Instantiate(proyectilePrefab, weaponPivot.position, weaponPivot.rotation);
+                bullet.transform.Rotate(0, Random.Range(-7.5f, 7.5f), 0);
+                GameManager.PlayEnemyGunShot(weaponPivot.position, GameManager.EnemyWeaponType.RIFLE);
+                break;
+
+            case NPC_WeaponType.SHOTGUN:
+                for (int i = 0; i < 5; i++)
+                {
+                    GameObject birdshot = Instantiate(proyectilePrefab, weaponPivot.position, weaponPivot.rotation);
+                    birdshot.transform.Rotate(0, Random.Range(-15, 15), 0);
+                }
+                GameManager.PlayEnemyGunShot(weaponPivot.position, GameManager.EnemyWeaponType.SHOTGUN, 1.0f);
+                break;
+        }
+    }
+
+    ////////////////////////// MISC FUNCTIONS //////////////////////////
+
+    void RandomRotate(){
 		float randomAngle =Random.Range (45, 180);
 		float randomSign = Random.Range (0, 2);
 		if (randomSign == 0)
@@ -328,7 +342,11 @@ public class NPC_Enemy : MonoBehaviour {
 		navMeshAgent.velocity = Vector3.zero;
 		//navMeshAgent.Stop ();
 		npcAnimator.SetBool ("Dead", true);
-		GameManager.AddScore (100);
+
+        // 🔊 죽을 때 피튀기는 소리 + 신음 소리 재생
+        GameManager.PlayEnemyDeathSounds(3.0f, 3.0f);
+
+        GameManager.AddScore (100);
 		npcAnimator.transform.parent = null;
 		Vector3 pos = npcAnimator.transform.position;
 		pos.y = 0.2f;

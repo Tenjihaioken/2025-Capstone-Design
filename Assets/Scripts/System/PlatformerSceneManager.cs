@@ -49,7 +49,7 @@ public class PlatformerSceneManager : MonoBehaviour
         if (minimapUI != null) minimapUI.gameObject.SetActive(true); // 미니맵 켜기
 
         // 초기 목표 설정 (예시)
-        UpdateObjective("현재 목표: 생존자를 찾아 대화하세요.");
+        UpdateObjective("현재 목표: 정보상에게 임무를 수령하세요.");
     }
 
     // ==========================================

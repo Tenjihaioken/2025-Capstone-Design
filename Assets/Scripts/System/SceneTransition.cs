@@ -37,7 +37,7 @@ public class SceneTransition : MonoBehaviour
 
         // 2. 씬 로딩
         SceneManager.LoadScene(sceneName);
-
+        yield return new WaitForSeconds(0.5f);
         // 3. Fade In (검정 -> 투명)
         while (t > 0)
         {

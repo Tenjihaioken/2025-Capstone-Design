@@ -6,7 +6,7 @@ public enum PlayerWeaponType { KNIFE, PISTOL, NULL }
 public class PlayerBehavior : MonoBehaviour
 {
     Rigidbody myRigidBody;
-    public float moveSpeed = 10.0f;
+    public float moveSpeed = 5.0f;
     public Transform hitTestPivot, gunPivot;
     public GameObject mousePointer, proyectilePrefab;
     public Animator animator;
@@ -45,7 +45,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
-        SetWeapon(PlayerWeaponType.PISTOL);
+        SetWeapon(PlayerWeaponType.KNIFE);
         myRigidBody = GetComponent<Rigidbody>();
         hashSpeed = Animator.StringToHash("Speed");
         attackTimer.StartTimer(0.1f);

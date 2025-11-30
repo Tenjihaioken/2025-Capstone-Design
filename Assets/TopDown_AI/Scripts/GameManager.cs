@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         myslf = this;
+        SelectWeapon(PlayerWeaponType.KNIFE);
     }
 
     void Update()

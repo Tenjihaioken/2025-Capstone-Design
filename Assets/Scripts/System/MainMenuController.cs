@@ -75,12 +75,8 @@ public class MainMenuController : MonoBehaviour
         SceneTransition.Instance.LoadScene("Stage1"); // 첫 스테이지 이름
 
         // 💡 중요: 새 데이터를 게임 씬으로 넘겨줌
-        GlobalTransferData.dataToLoad = newData;
+
     }
 }
 
 // 씬 간 데이터 전달을 위한 간단한 정적 클래스 (파일 아래에 추가하거나 별도 파일로 만드세요)
-public static class GlobalTransferData
-{
-    public static GameData dataToLoad; // 게임 씬에서 이 변수를 확인해서 적용하면 됨
-}

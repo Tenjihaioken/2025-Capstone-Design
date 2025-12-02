@@ -50,10 +50,10 @@ public class SystemManager : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f; // 게임 시간 정지
-        
-        if (pauseMenuUI != null) 
+
+        if (pauseMenuUI != null)
             pauseMenuUI.SetActive(true); // UI 켜기
-            
+
         Debug.Log("게임 일시정지");
     }
 
@@ -62,10 +62,10 @@ public class SystemManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f; // 게임 시간 정상화
-        
-        if (pauseMenuUI != null) 
+
+        if (pauseMenuUI != null)
             pauseMenuUI.SetActive(false); // UI 끄기
-            
+
         Debug.Log("게임 재개");
     }
 
@@ -89,11 +89,29 @@ public class SystemManager : MonoBehaviour
         Debug.Log("게임 종료");
         Application.Quit();
     }
-    
+
     // 메인 메뉴로 돌아가기
     public void GoToMainMenu()
     {
         ResumeGame(); // 시간은 다시 흐르게 해두고 이동
         SceneManager.LoadScene("MainMenu"); // 메인 메뉴 씬 이름 입력
     }
+
+    [Header("Audio Sources")]
+    public AudioSource bgmSource; // 배경음악 오디오 소스 연결
+    public AudioSource[] sfxSources; // 효과음 오디오 소스들 (선택)
+
+    public void SetBGMVolume(float volume)
+    {
+        if (bgmSource != null) bgmSource.volume = volume;
+        PlayerPrefs.SetFloat("BGMVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        // 모든 효과음 소스 볼륨 조절 (혹은 AudioMixer 사용 권장)
+        // 여기서는 간단히 전역 설정 값만 저장한다고 가정
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+    }
+
 }

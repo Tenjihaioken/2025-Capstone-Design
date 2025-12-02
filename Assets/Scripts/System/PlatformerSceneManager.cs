@@ -50,6 +50,14 @@ public class PlatformerSceneManager : MonoBehaviour
 
         // 초기 목표 설정 (예시)
         UpdateObjective("현재 목표: 정보상에게 임무를 수령하세요.");
+        if (GlobalTransferData.dataToLoad != null)
+        {
+            // GameManager가 데이터를 받아서 적용
+            GameManager.Instance.ApplyLoadedData(GlobalTransferData.dataToLoad);
+
+            // 사용한 데이터는 비워주기 (중복 적용 방지)
+            GlobalTransferData.dataToLoad = null;
+        }
     }
 
     // ==========================================

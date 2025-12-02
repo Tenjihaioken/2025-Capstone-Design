@@ -1,25 +1,20 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System;
-
+/*
 public class GameManager : MonoBehaviour
 {
     public Text scoreText, scoreTextBG;
     public GameObject restartMessage, knifeSelector, gunSelector, endSection;
-    public int currentScore = 0;
+    int currentScore = 0;
     static GameManager myslf;
-    public static GameManager Instance;
-
     public bool gameOver = false;
     int enemyCount;
 
     public float playerHealth = 100f;
     public float currentPlayTime = 0f;
 
-    public event Action<int> OnScoreChanged;
-    public event Action<float> OnHealthChanged;
+
 
     // 🔊 적 무기 사운드
     public AudioSource audioSource;
@@ -36,12 +31,6 @@ public class GameManager : MonoBehaviour
     {
         myslf = this;
         SelectWeapon(PlayerWeaponType.KNIFE);
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
     }
 
     void Update()
@@ -51,25 +40,7 @@ public class GameManager : MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
         }
     }
-    public void ApplyLoadedData(GameData data)
-    {
-        if (data == null) return;
 
-        currentScore = data.score;
-        playerHealth = data.playerHealth;
-        currentPlayTime = data.playTime;
-
-        Debug.Log($"[GameManager] 데이터 적용 완료: 점수 {currentScore}, 체력 {playerHealth}");
-
-        // UI에 변경 사항 알림
-        OnScoreChanged?.Invoke(currentScore);
-        OnHealthChanged?.Invoke(playerHealth);
-        if (data == null) return;
-
-        currentScore = data.score;
-        playerHealth = data.playerHealth;
-        currentPlayTime = data.playTime;
-    }
     public static void AddScore(int pointsAdded)
     {
         myslf.currentScore += pointsAdded;
@@ -177,4 +148,4 @@ public class GameManager : MonoBehaviour
     }
 }
 
-
+*/

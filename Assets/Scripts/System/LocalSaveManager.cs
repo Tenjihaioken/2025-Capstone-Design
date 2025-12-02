@@ -1,40 +1,35 @@
 using UnityEngine;
-using System.IO; // 파일 입출력용
+using System.IO;
 
 public class LocalSaveManager : MonoBehaviour
 {
-    // 저장할 파일 경로 (운영체제에 따라 안전한 경로를 자동 지정)
-    string path;
-
-    void Start()
+    // 슬롯별 파일 경로를 가져오는 함수
+    public string GetSavePath(int slotIndex)
     {
-        path = Path.Combine(Application.persistentDataPath, "savefile.json");
+        return Path.Combine(Application.persistentDataPath, $"savefile_{slotIndex}.json");
     }
 
-    public void SaveGame(GameData data)
+    // 슬롯 번호를 받아서 저장
+    public void SaveGame(GameData data, int slotIndex)
     {
-        // 1. 데이터를 JSON 문자열로 변환
         string json = JsonUtility.ToJson(data, true);
-
-        // 2. 파일로 쓰기
-        File.WriteAllText(path, json);
-        Debug.Log("저장 완료: " + path);
+        File.WriteAllText(GetSavePath(slotIndex), json);
+        Debug.Log($"슬롯 {slotIndex} 저장 완료");
     }
 
-    public GameData LoadGame()
+    // 슬롯 번호를 받아서 로드
+    public GameData LoadGame(int slotIndex)
     {
-        if (!File.Exists(path))
-        {
-            Debug.Log("저장된 파일이 없습니다. 새 데이터를 반환합니다.");
-            return new GameData(); // 기본값 반환
-        }
+        string path = GetSavePath(slotIndex);
+        if (!File.Exists(path)) return null; // 파일 없으면 null 반환
 
-        // 1. 파일 읽기
         string json = File.ReadAllText(path);
+        return JsonUtility.FromJson<GameData>(json);
+    }
 
-        // 2. JSON을 데이터 객체로 변환
-        GameData data = JsonUtility.FromJson<GameData>(json);
-        Debug.Log("로드 완료");
-        return data;
+    // 해당 슬롯에 파일이 있는지 확인
+    public bool ExistSaveData(int slotIndex)
+    {
+        return File.Exists(GetSavePath(slotIndex));
     }
 }

@@ -61,10 +61,16 @@ public class IntroManager : MonoBehaviour
         // 정식으로는 "빈 슬롯 선택 -> 이름 입력 -> 시작" 과정이 필요함
 
         GameData newData = new GameData();
-        GlobalTransferData.dataToLoad = newData; // 데이터 전달
-        GlobalTransferData.currentSlotIndex = 0; // 기본 0번 슬롯 사용
+        newData.currentLevel = 1; // 필요하다면 초기화
 
-        SceneTransition.Instance.LoadScene("Stage1");
+        GlobalTransferData.dataToLoad = newData;
+        GlobalTransferData.currentSlotIndex = 0;
+
+        // 2. 씬 이동
+        if (SceneTransition.Instance != null)
+            SceneTransition.Instance.LoadScene("2D_Stage2");
+        else
+            SceneManager.LoadScene("2D_Stage2");
     }
 
     public void OnClickContinue()
@@ -152,4 +158,5 @@ public class IntroManager : MonoBehaviour
     {
         quitPopup.SetActive(false);
     }
+
 }
